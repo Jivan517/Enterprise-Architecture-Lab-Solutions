@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id = "accountService" class = "cs544.exercise12_1.bank.service.AccountService">
+	
+	<constructor-arg ref = "accountDao" index="0"></constructor-arg>
+	<constructor-arg ref = "currencyConverter" index="1"></constructor-arg>
+	<constructor-arg ref = "jmsSender" index="2"></constructor-arg>
+	<constructor-arg ref = "logger" index="3"></constructor-arg>
+	
+	</bean>
+	<bean id = "accountDao" class = "cs544.exercise12_1.bank.dao.AccountDAO"></bean>
+	<bean id = "jmsSender" class = "cs544.exercise12_1.bank.jms.JMSSender"></bean>
+	<bean id = "currencyConverter" class = "cs544.exercise12_1.bank.service.CurrencyConverter"></bean>
+	<bean id = "logger" class = "cs544.exercise12_1.bank.logging.Logger"></bean>
+	
+
+</beans>

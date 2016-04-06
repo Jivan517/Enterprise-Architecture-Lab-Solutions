@@ -1,0 +1,20 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="cs544">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>edu.mum.hw2.domain.Order</class>
+		<class>edu.mum.hw2.domain.OrderLine</class>
+		<class>edu.mum.hw2.domain.Product</class>
+		<properties>
+			<property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/cs544?createDatabaseIfNotExist=true" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="P@ssw0rd" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>          
