@@ -2,7 +2,10 @@ package cs544.exercise8_1.bank.dao;
 
 import java.util.*;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import cs544.exercise8_1.bank.domain.Account;
+
 
 public class AccountDAO implements IAccountDAO {
 	Collection<Account> accountlist = new ArrayList<Account>();

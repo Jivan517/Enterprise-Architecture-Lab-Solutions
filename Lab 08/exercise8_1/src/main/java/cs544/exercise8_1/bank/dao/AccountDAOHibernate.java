@@ -3,9 +3,13 @@ package cs544.exercise8_1.bank.dao;
 import java.util.Collection;
 
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import cs544.exercise8_1.bank.domain.Account;
 
+@Transactional()
 public class AccountDAOHibernate implements IAccountDAO{
 
 	private SessionFactory sf ;
