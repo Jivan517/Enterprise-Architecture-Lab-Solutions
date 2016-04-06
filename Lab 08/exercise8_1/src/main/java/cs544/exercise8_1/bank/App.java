@@ -1,9 +1,14 @@
 package cs544.exercise8_1.bank;
 
 import java.util.Collection;
-import org.hibernate.Transaction;
 
-import cs544.exercise8_1.bank.dao.HibernateUtil;
+import javax.naming.Context;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import cs544.exercise8_1.bank.domain.Account;
 import cs544.exercise8_1.bank.domain.AccountEntry;
 import cs544.exercise8_1.bank.domain.Customer;
@@ -12,10 +17,14 @@ import cs544.exercise8_1.bank.service.IAccountService;
 
 public class App {
 
+	
     public static void main(String[] args) {
         try {
-            IAccountService accountService = new AccountService();
-            // create 2 accounts;
+        	
+        	ApplicationContext context =  new ClassPathXmlApplicationContext("springconfig.xml");
+        	IAccountService accountService = context.getBean("accountService", IAccountService.class);
+
+        	// create 2 accounts;
             accountService.createAccount(1263862, "Frank Brown");
             accountService.createAccount(4253892, "John Doe");
             // use account 1;
@@ -52,11 +61,13 @@ public class App {
             }
 
         } catch (RuntimeException e) {
-            Transaction tx = HibernateUtil.getSessionFactory()
-                    .getCurrentSession().getTransaction();
-            if (tx.isActive()) {
-                tx.rollback();
-            }
+//            Transaction tx = 
+//            		this.
+//            		sessionFactory
+//                    .getCurrentSession().getTransaction();
+//            if (tx.isActive()) {
+//                tx.rollback();
+//            }
             e.printStackTrace(System.err);
         }
         System.exit(0);

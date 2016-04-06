@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	
+	
+	<bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name = "driverClassName" value = "com.mysql.jdbc.Driver"></property>
+		<property name = "url" value = "jdbc:mysql://localhost/cs544"></property>
+		<property name = "username" value = "root"/>
+		<property name = "password" value = "P@ssw0rd"></property>
+	</bean>
+	
+	<bean id = "sessionFactory" class = "org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref = "dataSource"></property>
+		<property name="hibernateProperties" ref = "hibernateProperties"></property>
+		<property name="annotatedClasses">
+			<list>
+				<value>cs544.exercise8_1.bank.domain.Account</value>
+				<value>cs544.exercise8_1.bank.domain.AccountEntry</value>
+				<value>cs544.exercise8_1.bank.domain.Customer</value>
+			</list>
+		
+		</property>
+	</bean>
+	<bean id = "hibernateProperties" class = "org.springframework.beans.factory.config.PropertiesFactoryBean">
+	<property name="properties">
+		<props>
+			<prop key="hibernate.html2ddl.auto">create</prop>
+			<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+			<prop key = "connection.pool.size">1</prop>
+			<prop key="hibernate.show_sql">true</prop>
+			<prop key="hibernate.current_session_context_class">thread</prop>
+			<prop key="use_sql_comments">true</prop>
+		</props>
+	</property>
+	</bean>
+	<bean id = "logger" class = "cs544.exercise8_1.bank.logging.Logger"></bean>
+	<bean id = "jmsSender" class = "cs544.exercise8_1.bank.jms.JMSSender"></bean>
+	<bean id = "currencyConverter" class = "cs544.exercise8_1.bank.service.CurrencyConverter"></bean>
+	<bean id = "accountDao" class = "cs544.exercise8_1.bank.dao.AccountDAOHibernate">
+		<constructor-arg ref = "sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id = "accountService" class = "cs544.exercise8_1.bank.service.AccountService">
+	<constructor-arg index = "0" ref = "accountDao"></constructor-arg>
+	<constructor-arg index = "1" ref = "currencyConverter"></constructor-arg>
+	<constructor-arg index = "2" ref = "jmsSender"></constructor-arg>
+	<constructor-arg index = "3" ref = "logger"></constructor-arg>
+	<constructor-arg index = "4" ref = "sessionFactory"></constructor-arg>
+	
+	</bean>
+	
+</beans>
