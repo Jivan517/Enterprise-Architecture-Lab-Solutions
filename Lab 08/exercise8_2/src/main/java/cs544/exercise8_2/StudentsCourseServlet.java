@@ -2,34 +2,26 @@ package cs544.exercise8_2;
 
 import java.io.IOException;
 
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.WebApplicationException;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+
 
 public class StudentsCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private StudentService stuService;
-	
-	public void init(FilterConfig config){
-		ServletContext context = config.getServletContext();
-		
-		WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(context);
-		stuService = (StudentService) applicationContext.getBean("studentService", StudentService.class);
-	}
-	
-	@Transactional
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		ServletContext servletContext = getServletContext();
+		WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);//.getWebApplicationContext(servletContext);
+		StudentService serv = context.getBean("studentService", StudentService.class);
+		
 		String studentIdStr = request.getParameter("studentid");
 
 		long studentid = -1;
@@ -37,7 +29,7 @@ public class StudentsCourseServlet extends HttpServlet {
 
 		if (studentIdStr != null && studentIdStr.matches("\\d+")) {
 			studentid = Long.parseLong(studentIdStr);
-			StudentService studentService = stuService;
+			StudentService studentService = serv;
 			student = studentService.getStudent(studentid);
 		}
 

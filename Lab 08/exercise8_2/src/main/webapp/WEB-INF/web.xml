@@ -9,7 +9,7 @@
 	<filter>
 		<display-name>OpenSessionInViewFilter</display-name>
 		<filter-name>OpenSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<filter-class>cs544.exercise8_2.OpenSessionInViewFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>OpenSessionInViewFilter</filter-name>
@@ -24,13 +24,18 @@
 		<servlet-name>StudentsCourseServlet</servlet-name>
 		<url-pattern>/StudentsCourseServlet</url-pattern>
 	</servlet-mapping>
+	<!-- -->
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/springconfig.xml</param-value>
-	
+		<param-value>
+	        /WEB-INF/springconfig.xml
+	    </param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<!-- <listener> <listener-class> classpath*:org.springframework.web.context.ContextLoaderListener 
+		</listener-class> </listener> -->
 </web-app>
