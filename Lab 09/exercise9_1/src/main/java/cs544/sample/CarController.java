@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.support.ModelAndViewContainer;
 //import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 //@RequestMapping(value="/cars")
@@ -55,8 +56,8 @@ public class CarController {
 
 
 	@ExceptionHandler(value=NoSuchResourceException.class)
-	public ModelAndViewContainer handle(Exception e) {
-		ModelAndViewContainer mv = new ModelAndViewContainer();
+	public ModelAndView handle(Exception e) {
+		ModelAndView mv = new ModelAndView();
 		mv.getModel().put("e", e);
 		mv.setViewName("noSuchResource");
 		return mv;

@@ -12,8 +12,8 @@ public class BookDao implements IBookDao {
 	private Map<Integer, Book> books = new HashMap<>();
 
 	public BookDao() {
-		add(new Book());
-		add(new Book());
+		add(new Book("Spring in Action", "3434jsdkf3", "Oralando Arrocha", 343.34));
+		add(new Book("History of Nepal" , "NEPAL34343", "Jivan" , 2323.50));
 	}
 
 	@Override
