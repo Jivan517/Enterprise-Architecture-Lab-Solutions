@@ -22,4 +22,8 @@ public class StudentService {
 		//tx.commit();
 		return student;
 	}
+	
+	public void createStudent(){
+		studentdao.create();
+	}
 }

@@ -15,6 +15,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class StudentsCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,7 +27,8 @@ public class StudentsCourseServlet extends HttpServlet {
 
 		long studentid = -1;
 		Student student = null;
-
+		serv.createStudent();
+		
 		if (studentIdStr != null && studentIdStr.matches("\\d+")) {
 			studentid = Long.parseLong(studentIdStr);
 			StudentService studentService = serv;
@@ -36,6 +38,12 @@ public class StudentsCourseServlet extends HttpServlet {
 		request.setAttribute("student", student);
 		request.getRequestDispatcher("student.jsp").forward(request, response);
 
+	}
+	
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("tst");
 	}
 
 }
