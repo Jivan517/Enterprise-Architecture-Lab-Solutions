@@ -25,6 +25,11 @@
 			<td>Price:</td>
 			<td><input type="text" name="price" value="${book.price}" /> </td>
 		</tr>
+		<tr>
+			<td>Published Date:</td>
+			<td><input type="text" name="publishedDate" value="${book.publishedDate}" /> </td>
+		</tr>
+		
 	</table>
 	<input type="submit" value="update"/>
 	</form>
